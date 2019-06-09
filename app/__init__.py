@@ -31,6 +31,9 @@ def calendar_ics():
     cal.add('prodid', '-//Dation ICS feed//loriancoltof.nl//')
     cal.add('version', '2.0')
 
+    cal.add('method', 'PUBLISH')
+    cal.add('x-wr-calname', 'Rijles')
+
     for item in planning:
         event = Event()
 
