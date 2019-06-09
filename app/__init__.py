@@ -44,4 +44,4 @@ def calendar_ics():
 
         cal.add_component(event)
 
-    return cal.to_ical(), {"Content-Type": "text/plain"}
+    return cal.to_ical(), {"Content-Type": "text/calendar"}
