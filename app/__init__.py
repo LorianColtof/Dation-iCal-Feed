@@ -1,6 +1,7 @@
 from flask import Flask
 from icalendar import Calendar, Event
 from datetime import datetime
+from pytz import timezone
 
 from app import dation_service
 
@@ -24,6 +25,8 @@ def calendar_ics():
     address = (f"{ds_address.street} {ds_address.housenumber}, "
                f"{ds_address.zipcode} {ds_address.city}")
 
+    tz = timezone("Europe/Amsterdam")
+
     cal = Calendar()
     cal.add('prodid', '-//Dation ICS feed//loriancoltof.nl//')
     cal.add('version', '2.0')
@@ -32,8 +35,8 @@ def calendar_ics():
         event = Event()
 
         event.add('summary', item.name)
-        event.add('dtstart', item.start_time)
-        event.add('dtend', item.stop_time)
+        event.add('dtstart', item.start_time.astimezone(tz))
+        event.add('dtend', item.stop_time.astimezone(tz))
         event.add('dtstamp', datetime.now())
 
         event.add('description',
